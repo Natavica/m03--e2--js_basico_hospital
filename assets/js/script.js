@@ -1,87 +1,95 @@
 function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    navLinks.classList.toggle('show-menu');
+    try {
+        const navLinks = document.getElementById('navLinks');
+        if (!navLinks) throw new Error("Elemento 'navLinks' no encontrado.");
+        navLinks.classList.toggle('show-menu');
+        debugger; // Inspecciona el estado del elemento 'navLinks'
+    } catch (error) {
+        console.error("Error en toggleMenu:", error);
+        alert("Ocurrió un problema al alternar el menú.");
+    }
 }
 
-document.querySelectorAll('.navbar__links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const navLinks = document.getElementById("navLinks");
-        navLinks.classList.remove("active"); 
+
+try {
+    document.querySelectorAll('.navbar__links a').forEach(link => {
+        link.addEventListener('click', () => {
+            try {
+                const navLinks = document.getElementById("navLinks");
+                if (!navLinks) throw new Error("Elemento 'navLinks' no encontrado.");
+                navLinks.classList.remove("active");
+            } catch (error) {
+                console.error("Error al manejar el clic en un enlace:", error);
+            }
+        });
     });
-});
-
-// function reservarHora(){
-//     let nombre =  prompt("¿Para quién es la hora?");
-//     alert("El nombre que hemos guardado es" + nombre)
-//     console.log("Nombre:", nombre);
-
-//     let correo =   prompt("¿Cuál es tu correo de respaldo");
-//     alert("El nombre que hemos guardado es" + correo)
-//     console.log("Correo:", correo);
-
-//     let telefono =  prompt("¿Cuál es tu teléfono?");
-//     alert("El nombre que hemos guardado es" + telefono)
-//     console.log("Teléfono", telefono);
-// }
-
-// Función para validar el nombre (no vacío y sin caracteres especiales)
-function validarNombre(nombre) {
-    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/; // Solo letras y espacios
-    return regex.test(nombre) && nombre.trim() !== ""; // Asegura que no esté vacío
+} catch (error) {
+    console.error("Error al agregar eventos a los enlaces:", error);
 }
 
-// Función para validar el correo
-// function validarCorreo(correo) {
-//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de correo estándar
-//     return regex.test(correo);
-// }
-
+function validarNombre(nombre) {
+    debugger; // Inspecciona el valor de 'nombre'
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    return regex.test(nombre) && nombre.trim() !== "";
+}
 
 function validarCorreo(correo) {
-    // Verificamos que el correo contenga el carácter "@"
+    debugger; // Inspecciona el valor de 'correo'
     if (!correo.includes("@")) {
-        return false; // Si no contiene "@", no es válido
+        return false;
     } else {
         return true;
     }
 }
 
-// Función para validar el teléfono (solo números y entre 7 y 15 dígitos)
 function validarTelefono(telefono) {
-    const regex = /^\d{7,15}$/; // Solo números de 7 a 15 dígitos
+    debugger; // Inspecciona el valor de 'telefono'
+    const regex = /^\d{7,15}$/;
     return regex.test(telefono);
 }
 
-// Función genérica para pedir un dato y validarlo
+
 function pedirDato(mensaje, funcionValidar) {
-    let dato; // Variable para guardar el dato
+    let dato;
     do {
-        dato = prompt(mensaje); // Pedir el dato al usuario
-        if (!funcionValidar(dato)) {
-            alert("El dato ingresado no es válido. Por favor, inténtalo de nuevo.");
+        try {
+            dato = prompt(mensaje); 
+            if (!funcionValidar(dato)) {
+                throw new Error("El dato ingresado no es válido.");
+            }
+        } catch (error) {
+            console.error("Error al pedir dato:", error);
+            alert("Error: " + error.message);
         }
-    } while (!funcionValidar(dato)); // Repetir mientras el dato no sea válido
-    return dato; // Retornar el dato válido
+    } while (!funcionValidar(dato));
+    return dato;
 }
 
 // Seleccionar el botón y agregar el evento
-const botonReserva = document.getElementById("reserva");
-botonReserva.addEventListener("click", function () {
-    // Pedir y validar los datos
-    const nombre = pedirDato("Por favor, ingresa tu nombre:", validarNombre);
-    const correo = pedirDato("Por favor, ingresa tu correo electrónico:", validarCorreo);
-    const telefono = pedirDato("Por favor, ingresa tu número de teléfono:", validarTelefono);
+try {
+    const botonReserva = document.getElementById("reserva");
+    if (!botonReserva) throw new Error("Botón de reserva no encontrado.");
 
-    // Mostrar los datos si todo es válido
-    console.log("Nombre válido:", nombre);
-    console.log("Correo válido:", correo);
-    console.log("Teléfono válido:", telefono);
+    botonReserva.addEventListener("click", function () {
+        try {
+            debugger; // Detener la ejecución antes de pedir datos
+            const nombre = pedirDato("Por favor, ingresa tu nombre:", validarNombre);
+            const correo = pedirDato("Por favor, ingresa tu correo electrónico:", validarCorreo);
+            const telefono = pedirDato("Por favor, ingresa tu número de teléfono:", validarTelefono);
 
-    alert(`Datos válidos:\nNombre: ${nombre}\nCorreo: ${correo}\nTeléfono: ${telefono}`);
-});
+            console.log("Nombre válido:", nombre);
+            console.log("Correo válido:", correo);
+            console.log("Teléfono válido:", telefono);
 
-
-
+            alert(`Datos válidos:\nNombre: ${nombre}\nCorreo: ${correo}\nTeléfono: ${telefono}`);
+        } catch (error) {
+            console.error("Error al manejar el clic en el botón de reserva:", error);
+            alert("Ocurrió un problema al procesar tu reserva.");
+        }
+    });
+} catch (error) {
+    console.error("Error al inicializar el botón de reserva:", error);
+}
 
 // Datos de las personas para las cards
 const personas = [
@@ -112,24 +120,29 @@ const personas = [
 ];
 
 // Seleccionar el contenedor de las cards
-const contenedor = document.querySelector(".cards__container--equipo");
+try {
+    const contenedor = document.querySelector(".cards__container--equipo");
+    if (!contenedor) throw new Error("Contenedor de tarjetas no encontrado.");
 
-// Generar y agregar las cards al contenedor
-personas.forEach(persona => {
-    // Crear el div de la card
-    const card = document.createElement("div");
-    card.classList.add("card");
+    personas.forEach(persona => {
+        try {
+            const card = document.createElement("div");
+            card.classList.add("card");
 
-    // Agregar el contenido a la card
-    card.innerHTML = `
-        <img src="${persona.foto}" class="card__img" alt="Foto de ${persona.nombre}">
-        <ul>
-            <li class="card__text--nombre">${persona.nombre}</li>
-            <li class="card__text--especialidad">${persona.especialidad}</li>
-            <li class="card__text--resena">${persona.resena}</li>
-        </ul>
-    `;
+            card.innerHTML = `
+                <img src="${persona.foto}" class="card__img" alt="Foto de ${persona.nombre}">
+                <ul>
+                    <li class="card__text--nombre">${persona.nombre}</li>
+                    <li class="card__text--especialidad">${persona.especialidad}</li>
+                    <li class="card__text--resena">${persona.resena}</li>
+                </ul>
+            `;
 
-    // Agregar la card al contenedor
-    contenedor.appendChild(card);
-});
+            contenedor.appendChild(card);
+        } catch (error) {
+            console.error("Error al crear una tarjeta:", error);
+        }
+    });
+} catch (error) {
+    console.error("Error al inicializar las tarjetas:", error);
+}
