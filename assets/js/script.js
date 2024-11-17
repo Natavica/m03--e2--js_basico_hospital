@@ -31,9 +31,19 @@ function validarNombre(nombre) {
 }
 
 // Función para validar el correo
+// function validarCorreo(correo) {
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de correo estándar
+//     return regex.test(correo);
+// }
+
+
 function validarCorreo(correo) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de correo estándar
-    return regex.test(correo);
+    // Verificamos que el correo contenga el carácter "@"
+    if (!correo.includes("@")) {
+        return false; // Si no contiene "@", no es válido
+    } else {
+        return true;
+    }
 }
 
 // Función para validar el teléfono (solo números y entre 7 y 15 dígitos)
@@ -68,4 +78,58 @@ botonReserva.addEventListener("click", function () {
     console.log("Teléfono válido:", telefono);
 
     alert(`Datos válidos:\nNombre: ${nombre}\nCorreo: ${correo}\nTeléfono: ${telefono}`);
+});
+
+
+
+
+// Datos de las personas para las cards
+const personas = [
+    {
+        nombre: "Dr. Yoda Jedi",
+        especialidad: "Otorrinolaringología",
+        resena: "orem ipsum, dolor sit amet consectetur adipisicing elit. Abminus repellendus sit quae error! Nam, dicta repudiandae vitae commodi dolores, velitplaceat eligendi quod, eos odit explicabo repellendus sint voluptas.",
+        foto: "./assets/images/profesional--yoda.png"
+    },
+    {
+        nombre: "Dr. César Tapia",
+        especialidad: "Dermatología",
+        resena: "orem ipsum, dolor sit amet consectetur adipisicing elit. Abminus repellendus sit quae error! Nam, dicta repudiandae vitae commodi dolores, velitplaceat eligendi quod, eos odit explicabo repellendus sint voluptas.",
+        foto: "./assets/images/profesional--c3po.png"
+    },
+    {
+        nombre: "Dr. Chew Bacca",
+        especialidad: "Cardiología",
+        resena: "orem ipsum, dolor sit amet consectetur adipisicing elit. Abminus repellendus sit quae error! Nam, dicta repudiandae vitae commodi dolores, velitplaceat eligendi quod, eos odit explicabo repellendus sint voluptas.",
+        foto: "./assets/images/profesional--chewie.png"
+    },
+    {
+        nombre: "Dr. Darth Vader",
+        especialidad: "Cirujía General",
+        resena: "orem ipsum, dolor sit amet consectetur adipisicing elit. Abminus repellendus sit quae error! Nam, dicta repudiandae vitae commodi dolores, velitplaceat eligendi quod, eos odit explicabo repellendus sint voluptas.",
+        foto: "./assets/images/profesional--vader.png"
+    }
+];
+
+// Seleccionar el contenedor de las cards
+const contenedor = document.querySelector(".cards__container--equipo");
+
+// Generar y agregar las cards al contenedor
+personas.forEach(persona => {
+    // Crear el div de la card
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    // Agregar el contenido a la card
+    card.innerHTML = `
+        <img src="${persona.foto}" class="card__img" alt="Foto de ${persona.nombre}">
+        <ul>
+            <li class="card__text--nombre">${persona.nombre}</li>
+            <li class="card__text--especialidad">${persona.especialidad}</li>
+            <li class="card__text--resena">${persona.resena}</li>
+        </ul>
+    `;
+
+    // Agregar la card al contenedor
+    contenedor.appendChild(card);
 });
