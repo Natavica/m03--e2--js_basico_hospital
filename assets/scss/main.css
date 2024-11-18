@@ -86,13 +86,12 @@
 }
 
 .footer {
-  font-family: "Titillium Web", sans-serif;
   background-color: #c0e0dd;
   color: #444;
   padding: 28px 0 80px 0;
   text-align: center;
 }
-.footer .footer__container {
+.footer__container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -101,12 +100,12 @@
   padding: 20px;
 }
 @media (max-width: 768px) {
-  .footer .footer__container {
+  .footer__container {
     flex-direction: column;
     text-align: center;
   }
 }
-.footer .footer__container .footer__section {
+.footer__container .footer__section {
   flex: 1;
   min-width: 33%;
   margin: 10px 0;
@@ -114,70 +113,70 @@
   padding-left: 110px;
 }
 @media (max-width: 768px) {
-  .footer .footer__container .footer__section {
+  .footer__container .footer__section {
     padding-left: 0;
     border-bottom: 1px solid #eaeaea;
     padding-bottom: 18px;
     margin-bottom: 20px;
   }
 }
-.footer .footer__container .footer__section h4 {
+.footer__container .footer__section h4 {
   margin-bottom: 15px;
   font-size: 18px;
 }
-.footer .footer__container .footer__section ul {
+.footer__container .footer__section ul {
   list-style: none;
 }
-.footer .footer__container .footer__section ul li {
+.footer__container .footer__section ul li {
   margin-bottom: 10px;
 }
 @media (max-width: 768px) {
-  .footer .footer__container .footer__section ul li {
+  .footer__container .footer__section ul li {
     margin-bottom: 0;
   }
 }
-.footer .footer__container .footer__section ul li a {
+.footer__container .footer__section ul li a {
   color: #444;
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s;
 }
-.footer .footer__container .footer__section ul li a:hover {
+.footer__container .footer__section ul li a:hover {
   color: #4ba6a6;
 }
-.footer .footer__container .footer__section .icon a {
+.footer__container .footer__section .icon a {
   font-size: 24px;
   margin: 0 10px;
   color: #444;
   text-decoration: none;
   transition: color 0.3s, transform 0.3s ease;
 }
-.footer .footer__container .footer__section .icon span {
+.footer__container .footer__section .icon span {
   font-size: 24px;
   margin: 0 10px;
   color: #444;
   text-decoration: none;
   transition: color 0.3s, transform 0.3s ease;
 }
-.footer .footer__container .footer__section .icon a:hover {
+.footer__container .footer__section .icon a:hover {
   color: #4ba6a6;
 }
 @media (max-width: 768px) {
-  .footer .footer__container .social-icons {
+  .footer__container .social-icons {
     margin: 5px;
   }
 }
-.footer .footer-bottom {
+.footer__container__bottom {
   margin-top: 20px;
   font-size: 14px;
   border-top: 1px solid #eaeaea;
 }
 @media (max-width: 768px) {
-  .footer .footer-bottom {
+  .footer__container__bottom {
     border-top: inherit;
   }
 }
-.footer .footer-bottom p {
+.footer__container__bottom p {
   margin-top: 24px;
 }
 
