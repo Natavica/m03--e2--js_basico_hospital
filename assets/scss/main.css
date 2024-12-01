@@ -86,6 +86,7 @@
 }
 
 .footer {
+  font-family: "Titillium Web", sans-serif;
   background-color: #c0e0dd;
   color: #444;
   padding: 28px 0 80px 0;
@@ -470,4 +471,30 @@ body .body__container {
   width: 100%;
   height: 400px;
   border-radius: 8px;
+}
+
+.filters {
+  padding-bottom: 20px;
+}
+
+button {
+  color: #444;
+  background: #c0e0dd;
+  padding: 10px 30px;
+  border-radius: 50px;
+  border: none;
+  font-size: 14px;
+  font-family: "Titillium Web", sans-serif;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+button:hover {
+  color: white;
+  background: rgb(135, 181, 176);
 }/*# sourceMappingURL=main.css.map */

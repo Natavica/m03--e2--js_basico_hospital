@@ -2,8 +2,7 @@
 ## Taller: Integración de Funcionalidades Básicas de JavaScript en el Sitio Web del Hospital
 
 ### Descripción del Proyecto
-*Este proyecto es un sitio web informativo para una clínica médica. El propósito principal es brindar información clara y accesible sobre los servicios médicos, el equipo médico y los detalles de contacto de la clínica. Está desarrollado utilizando HTML, CSS y JavaScript para proporcionar una experiencia fluida y amigable para los usuarios. Es la segunda versión con mejoras como estilos modularizados con SASS modularizado
-s con SASS y se aplica BEM*
+*En este taller, los estudiantes deben continuar incorporando funcionalidades de JavaScript básico en el proyecto del hospital. Además de manipular el DOM, validar datos, y manejar errores, se pedirá la entrada de información del usuario a través de un prompt, mostrando los resultados por consola o como alertas en el navegador*
 
 ---
 
@@ -21,21 +20,27 @@ El sitio web se renderizará en el navegador, donde podrás navegar por las dife
 ### Estructura de Carpetas y Archivos
 ```bash
 
-/corfo-proyecto-01
+/Estructura
 │
 ├── /assets/
+├── ├── /js/
+│   │   └── script.js
+│   │   └── navbar.js
+│   │   └── prompt.js
+
+│   └── /images/ 
 │   ├── /scss/
 │       └── main.scss 
 │       └── main.css.map
 │       └── main.css
+│       └── /abstracts/  
 │       └── /components/  
-│                 └── _footer.scss
-│                 └── _header.scss
-│                 └── _variables.scss
+│       └── /pages/
+│       └── /theme/
+│       └── /vendors/      
+│                
 │  
-├── ├── /js/
-│   │   └── script.js
-│   └── /images/         
+        
 *
 ├── index.html              # Página principal (Home)
 ├── equipo.html             # Página del equipo médico
@@ -45,80 +50,74 @@ El sitio web se renderizará en el navegador, donde podrás navegar por las dife
 
 ---
 
+### Explicación 
 
+Este proyecto implementa un sistema de validación interactiva para recolectar datos del usuario a través de ventanas emergentes (prompts). Los datos recopilados incluyen el **nombre**, el **correo electrónico** y el **número de teléfono**, que son validados mediante funciones específicas antes de procesarlos.
 
-
-
-
-
-### Explicación de Vistas
-
-*Explica en el archivo README cómo funciona el event loop (stack, heap, queue) en JavaScript.*
-
-
-# Event Loop en JavaScript
-
-El **Event Loop** es un mecanismo fundamental en JavaScript que permite manejar operaciones asincrónicas y garantizar que las tareas se ejecuten de manera no bloqueante. A continuación, se describe cómo funcionan los componentes principales del Event Loop:
+## 📋 Características principales
+1. **Validación de los datos.**
+2. **Recolección y validación dinámica.**
+3. **Uso de un botón para iniciar el flujo.**
+4. **Herramientas de depuración y manejo de errores.**
 
 ---
 
-## Componentes principales
+## 1. Validación de los datos
 
-1. **Call Stack (Pila de llamadas)**:
-   - Es una estructura de datos que sigue el principio **LIFO** (*Last In, First Out*).
-   - Maneja las funciones y tareas que se están ejecutando de forma sincrónica.
-   - Cuando se llama a una función, esta se apila en el *Call Stack*. Cuando la función finaliza, se elimina de la pila.
+### Función `validarNombre(nombre)`
+- **Propósito:** Verifica que el nombre ingresado sea válido.
+- **Criterios:**
+  - Solo permite letras (mayúsculas, minúsculas), tildes, la letra "ñ" y espacios.
+  - No puede estar vacío (`nombre.trim() !== ""`).
+  - Utiliza una expresión regular (regex) para validar el formato.
 
-2. **Heap**:
-   - Es la región de memoria donde se almacenan los objetos y las variables dinámicas.
-   - JavaScript utiliza el *Heap* para asignar memoria de forma no estructurada y gestionar datos más complejos como objetos.
+### Función `validarCorreo(correo)`
+- **Propósito:** Valida que el correo contenga el carácter `@`.
+- **Nota:** Es una validación básica que puede ser mejorada si es necesario.
 
-3. **Message Queue (Cola de mensajes)**:
-   - Es una cola que sigue el principio **FIFO** (*First In, First Out*).
-   - Almacena las tareas asincrónicas (por ejemplo, eventos, `setTimeout`, `fetch`) que están listas para ser procesadas pero que esperan a que el *Call Stack* esté vacío.
-
-4. **Microtask Queue**:
-   - Similar a la Message Queue, pero con mayor prioridad.
-   - Contiene tareas como *Promises* resueltas y *Mutation Observers*. Estas tareas se procesan antes que las de la Message Queue.
-
----
-
-## Proceso del Event Loop
-
-*Es un mecanismo extra que añade un navegador cuando ejecuta js, de esta menera evitamos bloquear la ejecución de js constantemente*
-
-1. **Ejecutar las tareas en el Call Stack**:
-   - Mientras haya tareas en el *Call Stack*, estas se ejecutan una tras otra de manera sincrónica.
-
-2. **Revisar las Microtask Queue**:
-   - Si el *Call Stack* está vacío, el Event Loop procesará las tareas en la *Microtask Queue* antes de pasar a la *Message Queue*.
-
-3. **Procesar la Message Queue**:
-   - Una vez que la *Microtask Queue* está vacía, el Event Loop toma la primera tarea de la *Message Queue* y la ejecuta en el *Call Stack*.
-
-4. **Repetir el proceso**:
-   - El Event Loop continúa este ciclo hasta que no queden más tareas por ejecutar.
+### Función `validarTelefono(telefono)`
+- **Propósito:** Asegura que el número de teléfono tenga el formato adecuado.
+- **Criterios:**
+  - Contiene solo dígitos (`\d`).
+  - Tiene entre **7** y **15 caracteres**.
 
 ---
 
-## Ejemplo práctico
+## 2. Recolección y validación con `pedirDato`
 
-```javascript
-console.log('Inicio');
+### Función `pedirDato(mensaje, funcionValidar)`
+- **Descripción:** Solicita datos al usuario mediante un `prompt`, validando la entrada con una función específica.
+- **Detalles:**
+  - Usa una función de validación pasada como argumento (ejemplo: `validarNombre`).
+  - Si el usuario presiona "Cancelar", la función devuelve `null` y se interrumpe el proceso.
+  - Si el dato no es válido:
+    - Se muestra un mensaje de error con `alert`.
+    - Solicita nuevamente el dato hasta que sea correcto.
 
-setTimeout(() => {
-    console.log('Timeout 1');
-}, 0);
+---
 
-Promise.resolve().then(() => {
-    console.log('Promise 1');
-});
+## 3. Uso del botón para iniciar el flujo
 
-console.log('Fin');
+1. El botón con el ID `reserva` es seleccionado usando `document.getElementById`.
+2. **Al hacer clic:**
+   - Se solicita al usuario que ingrese su **nombre**, **correo**, y **teléfono**, en ese orden.
+   - Si el usuario cancela en cualquier paso, el proceso se detiene.
+   - Si todos los datos son válidos:
+     - Se imprimen en la consola (`console.log`).
+     - Se muestra un resumen en una ventana emergente (`alert`).
 
+---
 
-| Vista | | Descipción |
-|--------------|--------------|--------------|
-| Home     | (index.html)    | *Esta es la página de inicio del sitio web. Presenta una descripción general de los servicios de la clínica, información sobre su misión y visión, y enlaces a otras secciones como el equipo médico y la página de contacto.*|
-| Equipo       | (equipo.html)    | *En esta página se presenta una lista del equipo médico que trabaja en la clínica. Cada médico tiene una breve descripción de su especialidad, experiencia y una foto. Los usuarios pueden conocer más sobre los profesionales que estarán a cargo de su cuidado.* |
-| Contacto       | (contacto.html)   | *La página de contacto ofrece información sobre cómo llegar a la clínica, incluye un formulario para que los usuarios puedan enviar consultas o agendar una cita, y los detalles de contacto como dirección, teléfono y correo electrónico.* |
+## 4. Herramientas y características importantes
+
+### `debugger`
+- Pausa la ejecución del código en navegadores con herramientas de desarrollo abiertas.
+- Permite inspeccionar variables y el estado del programa.
+
+### `try-catch`
+- Captura y maneja errores inesperados durante la ejecución.
+- Es útil para evitar fallos en el manejo del DOM o las funciones de validación.
+
+### Mensajes dinámicos
+- La función `pedirDato` reutiliza tanto el mensaje como la validación pasada como argumentos.
+- **Ventaja:** Es flexible para diferentes tipos de datos.

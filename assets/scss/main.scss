@@ -301,9 +301,29 @@ body {
 }
 
 
+.filters {
+    padding-bottom: 20px;
+}
 
+button {
+    color: #444;
+    background: #c0e0dd;
+    padding: 10px 30px;
+    border-radius: 50px;
+    border: none;
+    font-size: 14px;
+    font-family: "Titillium Web", sans-serif;
+    cursor: pointer;
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
 
-
+button:hover {
+    color: white;
+    background: rgb(135, 181, 176);
+}
 
 
 
