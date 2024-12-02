@@ -27,17 +27,20 @@ El sitio web se renderizará en el navegador, donde podrás navegar por las dife
 │   │   └── script.js
 │   │   └── navbar.js
 │   │   └── prompt.js
-
+│
 │   └── /images/ 
 │   ├── /scss/
+│       └── /abstracts/  
+│       └── /components/  
+│       └── /core/
+│       └── /layout/
+│       └── /pages/
+│       └── /themes/
+│       └── /vendors/    
 │       └── main.scss 
 │       └── main.css.map
 │       └── main.css
-│       └── /abstracts/  
-│       └── /components/  
-│       └── /pages/
-│       └── /theme/
-│       └── /vendors/      
+│ 
 │                
 │  
         
