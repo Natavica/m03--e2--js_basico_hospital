@@ -41,9 +41,6 @@ El sitio web se renderizará en el navegador, donde podrás navegar por las dife
 │       └── main.css.map
 │       └── main.css
 │ 
-│                
-│  
-        
 *
 ├── index.html              # Página principal (Home)
 ├── equipo.html             # Página del equipo médico
